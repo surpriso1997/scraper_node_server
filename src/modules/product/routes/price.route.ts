@@ -14,6 +14,8 @@ class PriceRoute implements Route {
 
   private initializeRoutes() {
     this.router.post(`${this.path}`, this.priceController.addPrice);
+    this.router.get(`${this.path}`, this.priceController.getPriceBySku);
+    this.router.get(`/prices`, this.priceController.getAllPrices);
   }
 }
 export default PriceRoute;
