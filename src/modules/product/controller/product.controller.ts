@@ -18,11 +18,31 @@ export default class ProductController {
   public async getAllProducts(req: Request, res: Response) {
     const productService = new ProductService();
     try {
-      const products = await productService.findAllProducts();
-      return res.status(200).json({ data: products });
+      if (req.query['sku']) {
+        const product = await productService.findProduct(
+          req.query['sku'] as string,
+        );
+        return res.json({ data: product });
+      } else {
+        const products = await productService.findAllProducts();
+        return res.status(200).json({ data: products });
+      }
     } catch (e) {
       console.log(e);
       return res.status(400).json({ error: 'cannot get products' });
+    }
+  }
+
+  public async getProductBySku(req: Request, res: Response) {
+    const productService = new ProductService();
+
+    try {
+      const product = await productService.findProduct(
+        req.query['sku'] as string,
+      );
+      return res.json({ data: product });
+    } catch (error) {
+      return res.json({ data: [] });
     }
   }
   public async getProduct(req: Request, res: Response) {}
