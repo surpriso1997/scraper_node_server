@@ -14,7 +14,7 @@ export class ProductService {
     console.log(product);
     if (isEmpty(product)) throw new HttpException(400, 'Empty product');
     try {
-      const findProduct: Product | null = await ProductModel.findOne({
+      const findProduct: Product = await ProductModel.findOne({
         sku: product.sku,
       });
 
@@ -31,18 +31,22 @@ export class ProductService {
     }
   }
   public async findProduct(sku: string): Promise<String> {
-    const res = await ProductModel.findOne({ sku: sku });
+    let res = await await ProductModel.findOne({ sku: sku });
+    const data = await res.populate('Price').execPopulate();
+
     if (!res) {
       throw new HttpException(404, 'Product with sku not found');
     }
-    const product: string = res.toJSON();
+    const product: string = data.toJSON();
     return product;
   }
   public async findAllProducts(limit?: number): Promise<Product[]> {
     console.log(`getting product`);
 
     try {
-      const products = await ProductModel.find();
+      const data = await ProductModel.find();
+
+      const products = data;
       console.log(products);
       if (products) return products;
       else return [];
