@@ -37,8 +37,8 @@ export class ProductService {
     if (!res) {
       throw new HttpException(404, 'Product with sku not found');
     }
-    const product: string = data.toJSON();
-    return product;
+    // const product: string = data.toJSON();
+    return data.toJSON().toString();
   }
   public async findAllProducts(limit?: number): Promise<Product[]> {
     console.log(`getting product`);
