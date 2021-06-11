@@ -1,7 +1,7 @@
 # compiled output
 .vscode
 /node_modules
-
+/mongo-data/
 # code formatter
 .eslintrc
 .eslintignore
