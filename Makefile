@@ -13,3 +13,5 @@ ls:
 
 dev:
 	yarn run dev
+all:
+	docker ps -a
