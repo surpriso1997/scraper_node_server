@@ -1,29 +1,17 @@
 version: '3.7'
 
 services:
-    ### database
-  mongo_database:
-    image: mvertes/alpine-mongo
-    container_name: mongo_database
-    volumes:
-      - ./mongo-data:/data/db/
-    ports:
-      - '27017:27017'
-    networks:
-      - backend
-  
   ### this is the nginx server
-  proxy:
-    image: nginx:stable-alpine
-    container_name: nginx_proxy
-    ports:
-      - '80:80'
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    restart: 'unless-stopped'
-    networks:
-      - backend
-
+  # proxy:
+  #   image: nginx:stable-alpine
+  #   container_name: nginx_proxy
+  #   ports:
+  #     - '80:80'
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf
+  #   restart: 'unless-stopped'
+  #   networks:
+  #     - backend
 
       #### node server
   nodejs_server:
@@ -32,30 +20,16 @@ services:
       target: development-build-stage
       dockerfile: Dockerfile
     container_name: nodejs_server
-
     ports:
-      - '3000:3000'
-
-    environment:
-      MONGO_HOST: localhost
-      MONGO_PORT: 27017
-      MONGO_DATABASE: scraper
-    volumes:
-      - ./:/app
-      - /app/node_modules
+      - '3000:80'
+    # volumes:
+    #   - ./:/app
+    #   - /app/node_modules
 
     restart: 'unless-stopped'
     networks:
       - backend
-    links:
-      - mongo_database
-    depends_on:
-      - mongo_database
 
 networks:
   backend:
     driver: bridge
-
-volumes:
-  data:
-    driver: local
