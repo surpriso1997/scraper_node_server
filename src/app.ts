@@ -9,7 +9,7 @@ import hpp from 'hpp';
 import morgan from 'morgan';
 import { connect, set } from 'mongoose';
 import swaggerJSDoc from 'swagger-jsdoc';
-import swaggerUi from 'swagger-ui-express';
+import swaggerUi, { SwaggerOptions } from 'swagger-ui-express';
 import { dbConnection } from '@databases';
 import Routes from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
@@ -77,7 +77,7 @@ class App {
   }
 
   private initializeSwagger() {
-    const options = {
+    const options: SwaggerOptions = {
       swaggerDefinition: {
         info: {
           title: 'REST API',
@@ -85,6 +85,7 @@ class App {
           description: 'Example docs',
         },
       },
+
       apis: ['swagger.yaml'],
     };
 
