@@ -1,4 +1,4 @@
-import HttpException from '@/exceptions/HttpException';
+import HttpException from '@/common/exceptions/HttpException';
 import { Price, PriceModel } from '../model/price.model';
 import { Product, ProductModel } from '../model/product.model';
 

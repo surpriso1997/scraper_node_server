@@ -11,8 +11,9 @@ import { connect, set } from 'mongoose';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi, { SwaggerOptions } from 'swagger-ui-express';
 import { dbConnection } from '@databases';
-import Routes from '@interfaces/routes.interface';
-import errorMiddleware from '@middlewares/error.middleware';
+import errorMiddleware from './common/middlewares/error.middleware';
+import './common/interfaces/routes.interface';
+import Route from './common/interfaces/routes.interface';
 // import { logger, stream } from '@utils/logger';
 
 class App {
@@ -20,7 +21,7 @@ class App {
   public port: string | number;
   public env: string;
 
-  constructor(routes: Routes[]) {
+  constructor(routes: Route[]) {
     this.app = express();
     this.port = process.env.PORT || 3000;
     this.env = process.env.NODE_ENV || 'development';
@@ -70,7 +71,7 @@ class App {
     this.app.use(cookieParser());
   }
 
-  private initializeRoutes(routes: Routes[]) {
+  private initializeRoutes(routes: Route[]) {
     routes.forEach(route => {
       this.app.use('/', route.router);
     });

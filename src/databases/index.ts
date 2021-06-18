@@ -1,5 +1,5 @@
+import { dbConfig } from '@/common/interfaces/db.interface';
 import config from 'config';
-import { dbConfig } from '@interfaces/db.interface';
 import { env } from 'process';
 
 const devConfig: dbConfig = {
@@ -16,9 +16,6 @@ const prodConfig: dbConfig = {
   host: process.env.DB_USERNAME_DEV,
   port: 27017,
 };
-
-console.log(devConfig);
-console.log(prodConfig);
 
 const { host, database, password, url } =
   process.env.NODE_ENV == 'development' ? devConfig : prodConfig;

@@ -1,4 +1,4 @@
-import HttpException from '@/exceptions/HttpException';
+import HttpException from '@/common/exceptions/HttpException';
 import { mongoose } from '@typegoose/typegoose';
 import { BeAnObject } from '@typegoose/typegoose/lib/types';
 import { isEmpty } from 'class-validator';

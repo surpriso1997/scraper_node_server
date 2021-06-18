@@ -1,0 +1,24 @@
+tags:
+  - name: product
+    description: products and prices API
+
+paths:
+  /product:
+    #[POST]  product
+    post:
+      tags:
+        - products
+      summary: Add/create product
+      responses:
+        200:
+          description: "OK , product created"
+        400:
+          description: "Product with that sku already exists"
+    #[GET] products
+    get:
+      tags:
+        - get_products
+      summary: get all products
+      responses:
+        200:
+          description: "found products"
