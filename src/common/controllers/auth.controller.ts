@@ -4,7 +4,6 @@ import { RequestWithUser } from '../interfaces/auth.interface';
 import { User } from '../interfaces/users.interface';
 import AuthService from '../services/auth.service';
 
-
 class AuthController {
   public authService = new AuthService();
 
@@ -12,7 +11,6 @@ class AuthController {
     try {
       const userData: CreateUserDto = req.body;
       const signUpUserData: User = await this.authService.signup(userData);
-
       res.status(201).json({ data: signUpUserData, message: 'signup' });
     } catch (error) {
       next(error);
@@ -31,7 +29,11 @@ class AuthController {
     }
   };
 
-  public logOut = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+  public logOut = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction,
+  ) => {
     try {
       const userData: User = req.user;
       const logOutUserData: User = await this.authService.logout(userData);

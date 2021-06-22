@@ -4,7 +4,7 @@
         {
             "type": "node-terminal",
             "request": "launch",
-            "name": "Dev typescript-express-starter",
+            "name": "scraper dev",
             "command": "npm run dev"
         },
         {
